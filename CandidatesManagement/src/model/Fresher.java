@@ -13,19 +13,11 @@ public class Fresher extends Candidate {
         this.setId("F"+String.valueOf(++count));
     }
 
-    public Fresher(String graduationRank, String education, String graduationDate, String fName, String lName, String address, String phone, String email, String bDate) {
-        super(fName, lName, address, phone, email, bDate);
-        this.graduationRank = graduationRank;
-        this.education = education;
-        this.graduationDate = LocalDate.parse(graduationDate, DateTimeFormatter.ofPattern("dd/MM/yy"));
-        this.setId("F"+String.valueOf(++count));
-    }
-
-    public Fresher(String graduationRank, String education, String graduationDate, String fName, String lName, String address, String phone, String email, int type, String bDate) {
+    public Fresher(String graduationRank, String education, LocalDate graduationDate, String fName, String lName, String address, String phone, String email, int type, LocalDate bDate) {
         super(fName, lName, address, phone, email, type, bDate);
         this.graduationRank = graduationRank;
         this.education = education;
-        this.graduationDate = LocalDate.parse(graduationDate, DateTimeFormatter.ofPattern("dd/MM/yy"));
+        this.graduationDate = graduationDate;
         this.setId("F"+String.valueOf(++count));
     }
 
@@ -55,7 +47,7 @@ public class Fresher extends Candidate {
     
     @Override
     public String toString() {
-        return this.getId()+": " + this.getfName()+" "+this.getlName();
+        return String.format("%-5s %-5s | &-5s | %-10s | %-10s | %-10s | &-5d", this.getfName(), this.getlName(), this.getbDate(), this.getAddress(), this.getId(), this.getEmail(),this.getType());
     }
     
 }

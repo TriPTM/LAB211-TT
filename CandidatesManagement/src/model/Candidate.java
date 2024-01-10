@@ -19,19 +19,19 @@ public class Candidate {
         this.address = address;
         this.phone = phone;
         this.email = email;
-        this.bDate = LocalDate.parse(bDate, DateTimeFormatter.ofPattern("dd/MM/yy"));
+        this.bDate = LocalDate.parse(bDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
-
-    public Candidate(String fName, String lName, String address, String phone, String email, int type, String bDate) {
+    
+    public Candidate(String fName, String lName, String address, String phone, String email, int type, LocalDate bDate) {
         this.fName = fName;
         this.lName = lName;
         this.address = address;
         this.phone = phone;
         this.email = email;
         this.type = type;
-        this.bDate = LocalDate.parse(bDate, DateTimeFormatter.ofPattern("dd/MM/yy"));
-    }
-
+        this.bDate = bDate;
+    }    
+    
     public String getfName() {
         return fName;
     }

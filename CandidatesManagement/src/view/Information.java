@@ -1,30 +1,28 @@
 
 package view;
 
-import controllers.CandidateManager;
-import controllers.Validation;
-import models.Experience;
-import models.Fresher;
-import models.Intern;
+import controller.ListCandidate;
+import controller.Validation;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import static jdk.nashorn.internal.runtime.Debug.id;
+import model.Experience;
+import model.Fresher;
+import model.Internship;
+import test.Main;
 
 public class Information {
-    protected String id, FName, LName, address, phone, email;
-    protected int type, dob;
+    private String fName, lName, address, phone, email;
+    private LocalDate bDate;
     private Validation val = new Validation();
-    private CandidateManager c = new CandidateManager();
 
-    public Information(int flag) {
-        type = flag;
-        
-        id = val.madeId(flag);
-        
+    public Information(int type) {         
         while (true) {            
             System.out.print("First name: ");
-            FName = val.inputString();
-            if (FName == "") {
-                System.out.println("-----------------");
-                System.out.println("Name just contain letters!!");
-                System.out.println("-----------------");
+            fName = val.getWord();
+            if (fName == "") {
+                Error.printErrorName();
             } else {
                 break;
             }
@@ -32,11 +30,9 @@ public class Information {
         
         while (true) {            
             System.out.print("Last name: ");
-            LName = val.inputString();
-            if (LName == "") {
-                System.out.println("-----------------");
-                System.out.println("Name just contain letters!!");
-                System.out.println("-----------------");
+            lName = val.getWord();
+            if (lName == "") {
+                Error.printErrorName();
             } else {
                 break;
             }
@@ -44,99 +40,108 @@ public class Information {
         
         while (true) {            
             System.out.print("Date of birth: ");
-            dob = val.inputNum();
-            if (dob < 1900) {
-                System.out.println("-----------------");
-                System.out.println("Date is more than 1900!!");
-                System.out.println("-----------------");
+            try{
+                bDate = LocalDate.parse(val.getString(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            }catch(Exception ex){
+                Error.printError(ex.getMessage());
+            }
+            if (!val.checkBDate(bDate)) {
+                Error.printErrorBDate();
             } else {
                 break;
             }
         }
         
         System.out.print("Address: ");
-        address = val.inputString();
+        address = val.getString();
         
         while (true) {            
             System.out.print("Phone: ");
-            phone = val.inputString();
+            phone = val.getString();
             if (!val.checkPhone(phone)) {
-                System.out.println("-----------------");
-                System.out.println("Phone just contain number!!");
-                System.out.println("-----------------");
+                Error.printErrorPhone();
             } else {
                 break;
             }
         }
         
-        System.out.println("Email: ");
-        email = val.inputString();
+        while (true) {            
+            System.out.println("Email: ");
+            email = val.getString();
+            if (!val.checkEmail(email)) {
+                Error.printErrorEmail();
+            } else {
+                break;
+            }
+        }
         
-        switch (flag) {
-            case 1:
-                String proSkill;
-                int expInYear;
+        type--;
+        
+        switch (type) {
+            case 0:
+                ArrayList<String> proSkill = new ArrayList<>();
+                int yearEx;
                 while (true) {            
                     System.out.print("Year of experience: ");
-                    expInYear = val.inputNum();
-                    if (expInYear < 0) {
-                        System.out.println("-----------------");
-                        System.out.println("Year of experience must be more than 0!!");
-                        System.out.println("-----------------");
+                    yearEx = val.getInt();
+                    if (!val.checkYearEx(yearEx)) {
+                        Error.pirntErrorYearEx();
                     } else {
                          break;
                     }
                 }
+                do{
+                    System.out.print("Professional Skill: ");
+                    proSkill.add(val.getWord());
+                    System.out.println("Want more to enter(Enter Y)");
+                    String checked=val.getString();
+                    if(!checked.equals("Y")){
+                        break;
+                    }
+                }while(true);
                 
-                System.out.print("Professional Skill: ");
-                proSkill = val.inputString();
-                
-                c.getE().add(new Experience(expInYear, proSkill, id, FName, LName, dob, address, phone, email, type));
+                Main.list.addExperience(new Experience(yearEx,proSkill,fName,lName,address,phone,email,type,bDate));
                 break;
-            case 2:
-                String graduation_Rank, education;
-                int graduation_Date;
+            case 1:
+                String graduationRank, education;
+                LocalDate graduationDate;
                 
                 while (true) {            
                     System.out.print("Graduated time: ");
-                    graduation_Date = val.inputNum();
-                    if (graduation_Date < 1900) {
-                        System.out.println("-----------------");
-                        System.out.println("Date is more than 1900!!");
-                        System.out.println("-----------------");
-                    } else {
-                         break;
+                    try{
+                        graduationDate = LocalDate.parse(val.getString(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                        break;
+                    }catch(Exception ex){
+                        Error.printError(ex.getMessage());
                     }
                 }
                 
                 while (true) {                    
                     System.out.print("Rank of graduation: (Excellence, Good, Fair, Poor)");
-                    graduation_Rank = val.inputString();
-                    if (!val.checkRank(graduation_Rank)) {
-                        System.out.println("-----------------");
-                        System.out.println("Rank is one of: Excellence, Good, Fair, Poor!!");
-                        System.out.println("-----------------");
+                    graduationRank = val.getWord();
+                    if (!val.checkRank(graduationRank)) {
+                        Error.printErrorGraduationRank();
                     } else {
                         break;
                     }
                 }
                 
                 System.out.print("University: ");
-                education = val.inputString();
+                education = val.getWord();
                 
-                c.getF().add(new Fresher(graduation_Date, graduation_Rank, education, id, FName, LName, dob, address, phone, email, type));
+                Main.list.addFresher(new Fresher(graduationRank,education,graduationDate,fName,lName,address,phone,email,type,bDate));
                 break;
                 
-            case 3:
-                String majors, semester, university;
+            case 2:
+                String major, semester, university;
                 System.out.print("Majors: ");
-                majors = val.inputString();
+                major = val.getWord();
                 System.out.print("Semester: ");
-                semester = val.inputString();
+                semester = val.getWord();
                 System.out.print("University: ");
-                university = val.inputString();
+                university = val.getWord();
                 
-                c.getI().add(new Intern(majors, semester, university, id, FName, LName, dob, address, phone, email, type));
+                Main.list.addInternship(new Internship(major,semester,university,fName,lName,address,phone,email,type,bDate));
                 break;
         }
         
