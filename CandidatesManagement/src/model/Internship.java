@@ -45,6 +45,6 @@ public class Internship extends Candidate {
     
     @Override
     public String toString() {
-        return String.format("%-5s %-5s | &-5s | %-10s | %-10s | %-10s | &-5d", this.getfName(), this.getlName(), this.getbDate(), this.getAddress(), this.getId(), this.getEmail(),this.getType());
+        return String.format("%-5s %-5s | %-5s | %-10s | %-10s | %-10s | %-5d", this.getfName(), this.getlName(), this.getbDate(), this.getAddress(), this.getId(), this.getEmail(),this.getType());
     }
 }
