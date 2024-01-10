@@ -30,7 +30,6 @@ public class Validation {
     }
     
     public boolean checkBDate(LocalDate bDate){
-        System.out.println(bDate.getYear());
         if(bDate.getYear()>1900) return true;
         return false;
     }

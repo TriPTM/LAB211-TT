@@ -9,7 +9,9 @@ public class Error {
     }
     
     public static void printError(String ex){
-        
+        System.out.println("-----------------");
+        System.out.println(ex);
+        System.out.println("-----------------");
     }
     
     public static void printErrorBDate(){
