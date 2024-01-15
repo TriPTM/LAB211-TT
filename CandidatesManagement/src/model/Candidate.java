@@ -6,9 +6,9 @@ import java.time.format.DateTimeFormatter;
 import javax.swing.text.DateFormatter;
 
 public class Candidate {
-    private String id,fName,lName,address,phone,email;
-    private int type;
-    private LocalDate bDate;
+    protected String id,fName,lName,address,phone,email;
+    protected int type;
+    protected LocalDate bDate;
 
     public Candidate() {
     }
