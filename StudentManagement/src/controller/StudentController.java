@@ -1,6 +1,7 @@
 
 package controller;
 
+import Library.Validation;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -8,11 +9,12 @@ import java.util.Map;
 import java.util.function.Predicate;
 import model.Student;
 
-public class StudentList extends ArrayList<Student> {
+public class StudentController extends ArrayList<Student> {
     
     private Map<Student, Integer> count= new HashMap<Student, Integer>();
+    private Validation val = new Validation();
 
-    public StudentList() {
+    public StudentController() {
     }
     
     public ArrayList<Student> search(Predicate<Student> p){
@@ -27,9 +29,12 @@ public class StudentList extends ArrayList<Student> {
     public void update(String id, String name, String semester, String course){
         for(Student a:this){
             if(a.getId().equals(id)){
-                if(name!=null)  a.setName(name);
-                if(semester!=null)  a.setSemester(semester);
-                if(course!=null)    a.setCourse(course);
+                if(!name.equals(""))  a.setName(name);
+                if(!semester.equals(""))  a.setSemester(semester);
+                if(!course.equals("")){
+                    if(val.checkCourse(course))     a.setCourse(course);
+                    else    System.out.println("Wrong course - No update course!!!");
+                }
                 System.out.println("Updated!!!");
                 return;
             }
@@ -60,5 +65,5 @@ public class StudentList extends ArrayList<Student> {
             System.out.println(String.format("%-15s | %-10s | %-5d", a.getName(),a.getCourse(),count.get(a)));
         }
     }
-    
+
 }

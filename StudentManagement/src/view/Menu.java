@@ -1,5 +1,6 @@
-package controller;
+package view;
 
+import controller.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
