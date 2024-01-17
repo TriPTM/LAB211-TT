@@ -1,10 +1,9 @@
 
-package studentmanagement;
+package fruitshop;
 
-import model.Student;
 import view.MainMenu;
 
-public class StudentManagementMain {
+public class FruitShop {
 
     public static void main(String[] args) {
         new MainMenu().run();
