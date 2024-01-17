@@ -54,7 +54,7 @@ public class CustomerView {
                     int i=1;
                     int amount=0;
                     for(Fruit item: order){
-                        System.out.println(String.format("%-8s  %-10d  %-7s  %-7s", i+". "+item.getFruitName(),item.getQuantity(),item.getPrice()+"$",(item.getPrice()*item.getQuantity())+"$"));
+                        System.out.println(String.format("%-8s   %-10d   %-7s   %-7s", i+". "+item.getFruitName(),item.getQuantity(),item.getPrice()+"$",(item.getPrice()*item.getQuantity())+"$"));
                         amount+=item.getPrice()*item.getQuantity();
                         i++;
                     }
