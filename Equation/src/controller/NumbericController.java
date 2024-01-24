@@ -29,6 +29,7 @@ public class NumbericController {
         List<Numberic> list= new ArrayList<Numberic>();
         if(a==0){
             list=calculateEquation(b,c);
+            list.add(0, new Numberic(0,false,true,true));
             return list;
         }else{
             float denta= (float) (Math.pow(b, 2)-4*a*c);
@@ -66,9 +67,39 @@ public class NumbericController {
     
     public void checkSquare(List<Numberic> list){
         for(Numberic number:list){
-            if((float)Math.sqrt(number.getNum())*(float)Math.sqrt(number.getNum())==number.getNum()){
+            if(((int)Math.sqrt(number.getNum())*(int)Math.sqrt(number.getNum()))==number.getNum()){
                 number.setPerfectSquare(true);
             }else   number.setPerfectSquare(false);
         }
+    }
+    
+    public int countOdd(List<Numberic> list){
+        int count=0;
+        for(Numberic number:list){
+            if(number.isOdd()){
+                count++;
+            }
+        }
+        return count;
+    }
+    
+    public int countEven(List<Numberic> list){
+        int count=0;
+        for(Numberic number:list){
+            if(number.isEven()){
+                count++;
+            }
+        }
+        return count;
+    }
+    
+    public int countSquare(List<Numberic> list){
+        int count=0;
+        for(Numberic number:list){
+            if(number.isPerfectSquare()){
+                count++;
+            }
+        }
+        return count;
     }
 }

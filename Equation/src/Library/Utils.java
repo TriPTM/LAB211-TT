@@ -7,7 +7,7 @@ public class Utils {
     public float getNumber(String td) {
         boolean flag;
         Scanner sc=new Scanner(System.in);
-        String digit = "\\d+\\.*\\d*+";
+        String digit = "-*\\d+\\.*\\d*+";
         String input;
         do{
         System.out.println(td+": ");

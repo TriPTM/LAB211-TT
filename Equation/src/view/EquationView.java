@@ -3,6 +3,7 @@ package view;
 
 import Library.Utils;
 import controller.NumbericController;
+import java.util.ArrayList;
 import java.util.List;
 import model.Numberic;
 
@@ -15,22 +16,23 @@ public class EquationView {
         float a=ut.getNumber("Enter A");
         float b=ut.getNumber("Enter B");
         List<Numberic> list=nc.calculateEquation(a, b);
-        if(list.isEmpty()){
+        if(list==null){
+            System.out.println("No solutions ");
+            list= new ArrayList<Numberic>();
+            list.add(new Numberic(a));
+            list.add(new Numberic(b));
+            nc.checkEven(list);
+            nc.checkSquare(list);
+            print(list);
+        }else if(list.isEmpty()){
             System.out.println("Infinitely many solutions ");
             list.add(new Numberic(a));
             list.add(new Numberic(b));
             nc.checkEven(list);
             nc.checkSquare(list);
             print(list);
-        }else if(list.equals(null)){
-            System.out.println("No solutions ");
-            list.add(new Numberic(a));
-            list.add(new Numberic(b));
-            nc.checkEven(list);
-            nc.checkSquare(list);
-            print(list);
         }else{
-            System.out.println("Solution: x= "+list.get(2).getNum());
+            System.out.println("Solution: x= "+String.format("%.3f", list.get(2).getNum()));
             print(list);
         }
     }
@@ -40,17 +42,18 @@ public class EquationView {
         float a=ut.getNumber("Enter A");
         float b=ut.getNumber("Enter B");
         float c=ut.getNumber("Enter C");
-        List<Numberic> list=nc.calculateEquation(a, b);
-        if(list.isEmpty()){
-            System.out.println("Infinitely many solutions ");
+        List<Numberic> list=nc.calculateQuadraticEquation(a,b,c);
+        if(list==null){
+            System.out.println("No solutions ");
+            list= new ArrayList<Numberic>();
             list.add(new Numberic(a));
             list.add(new Numberic(b));
             list.add(new Numberic(c));
             nc.checkEven(list);
             nc.checkSquare(list);
             print(list);
-        }else if(list.equals(null)){
-            System.out.println("No solutions ");
+        }else if(list.isEmpty()){
+            System.out.println("Infinitely many solutions ");
             list.add(new Numberic(a));
             list.add(new Numberic(b));
             list.add(new Numberic(c));
@@ -59,30 +62,57 @@ public class EquationView {
             print(list);
         }else{
             if(list.size()==4) System.out.println("Solution: x= "+list.get(3).getNum());
-            else    System.out.println("Solution: x1 = "+list.get(3).getNum()+"and x2 = " +list.get(4).getNum());
+            else    System.out.println("Solution: x1 = "+String.format("%.3f", list.get(3).getNum())+"and x2 = " +String.format("%.3f", list.get(4).getNum()));
             print(list);
         }
     }
     
     public void print(List<Numberic> list){
         System.out.print("Number is Odd:");
-        for(Numberic number:list){
-            if(number.isOdd()){
-                System.out.print(number.getNum()+"   ");
+        int i=1;
+        int count=nc.countOdd(list);
+        if(count==0)    System.out.print("There are no numbers");
+        else {
+            for(Numberic number:list){
+                if(number.isOdd()){
+                    System.out.print(number.getNum());
+                    if(i<count){
+                        System.out.print(", ");
+                    }
+                    i++;
+                }
             }
         }
         System.out.println("");
         System.out.print("Number is Even:");
-        for(Numberic number:list){
-            if(number.isEven()){
-                System.out.print(number.getNum()+"   ");
+        i=1;
+        count=nc.countEven(list);
+        if(count==0)    System.out.print("There are no numbers");
+        else {
+            for(Numberic number:list){
+                if(number.isEven()){
+                    System.out.print(number.getNum());
+                    if(i<count){
+                        System.out.print(", ");
+                    }
+                    i++;
+                }
             }
         }
         System.out.println("");
         System.out.print("Number is Perfect Square:");
-        for(Numberic number:list){
-            if(number.isPerfectSquare()){
-                System.out.print(number.getNum()+"   ");
+        i=1;
+        count=nc.countSquare(list);
+        if(count==0)    System.out.print("There are no numbers");
+        else {
+            for(Numberic number:list){
+                if(number.isPerfectSquare()){
+                    System.out.print(number.getNum());
+                    if(i<count){
+                        System.out.print(", ");
+                    }
+                    i++;
+                }
             }
         }
         System.out.println("");  
