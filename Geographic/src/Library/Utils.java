@@ -27,7 +27,7 @@ public class Utils {
         System.out.println(td+": ");
         boolean flag;
         Scanner sc=new Scanner(System.in);
-        String digit = "\\d+\\.*\\d+";
+        String digit = "\\d+\\.*\\d*+";
         String input = sc.next();
         flag = input.matches(digit);
         if(!flag)   throw new RuntimeException("You must enter a number!");
