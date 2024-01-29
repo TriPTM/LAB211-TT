@@ -1,6 +1,5 @@
 package view;
 
-import controller.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -34,12 +33,10 @@ public abstract class Menu<T> {
     }
 //----------------------------------------------------
     public void display(){
-        System.out.println(title);
-        System.out.println("-------------------");
+        System.out.println("=============== "+title+" ===============");
         for(int i=0; i<choices.size();i++){
             System.out.println((i+1)+". "+choices.get(i));
         }
-        System.out.println("-------------------");
     }
 //----------------------------------------------------
     public int getSelected(){
