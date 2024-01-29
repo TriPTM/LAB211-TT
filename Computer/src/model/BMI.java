@@ -1,12 +1,14 @@
-package model;
-public class Numberic {
-    private double height;
-    private double weight;
 
-    public Numberic() {
+package model;
+
+public class BMI {
+    private double height,weight;
+    private String status;
+
+    public BMI() {
     }
 
-    public Numberic(double height, double weight) {
+    public BMI(double height, double weight) {
         this.height = height;
         this.weight = weight;
     }
@@ -26,7 +28,14 @@ public class Numberic {
     public void setWeight(double weight) {
         this.weight = weight;
     }
-    
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
     
     
 }
