@@ -49,7 +49,7 @@ public class ContactView {
     }
     
     public void displayContact(){
-        System.out.println("--------------------------------- Display all Contact ----------------------------");
+        System.out.println("------------------------------------- Display all Contact --------------------------------");
         System.out.println(String.format("%-5s%-20s%-15s%-15s%-10s%-12s%-15s", "Id", "Name","First name", "Last name", "Group", "Address", "Phone"));
         for (Contact c : cList.getcList()) {
             System.out.println(String.format("%-5d%-20s%-15s%-15s%-10s%-12s%-15s",c.getId(), c.getFullname(),c.getFirstname(), c.getLastname(),c.getGroup(), c.getAddress(), c.getPhone()));
