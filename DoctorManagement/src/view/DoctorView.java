@@ -120,6 +120,6 @@ public class DoctorView {
     public void saveData(){
         System.err.println("Saving....");
         System.err.flush();
-        dList.loadData("data.dat");
+        dList.saveData("data.dat");
     }
 }

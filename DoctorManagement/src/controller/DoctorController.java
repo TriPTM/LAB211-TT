@@ -100,6 +100,7 @@ public class DoctorController {
             PrintWriter pw= new PrintWriter(new FileWriter(fName));
             for(String code:dList.keySet()){
                 Doctor s=dList.get(code);
+                System.out.println(code);
                 pw.println((s.getCode())+","+s.getName()+","+s.getSpecialization()+","+s.getAvailability());
             }
             pw.close();
