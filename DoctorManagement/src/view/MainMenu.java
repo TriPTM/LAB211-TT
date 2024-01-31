@@ -16,7 +16,7 @@ public class MainMenu extends Menu {
             case 2: dView.updateDoctor();break;
             case 3: dView.deleteDoctor();break;
             case 4: dView.searchDoctor();break;
-            case 5: System.exit(0);
+            case 5: dView.saveData();System.exit(0);
         }
     }
 

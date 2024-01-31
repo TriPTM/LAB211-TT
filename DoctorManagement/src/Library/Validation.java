@@ -41,11 +41,18 @@ public class Validation {
     }
     
     public int changeNullNumber(String td){
-        System.out.print(td+": ");
         Scanner sc=new Scanner(System.in);
-        String s= sc.nextLine();
-        if(s.equals(""))    return -1;
-        else return Integer.parseInt(s);
+        while(true){
+            try{
+                System.out.print(td+": ");
+                String s= sc.nextLine();
+                if(s.equals(""))    return -1;
+                else return Integer.parseInt(s);
+            }catch(NumberFormatException e){
+                System.err.println("Please Enter Number");
+                System.err.flush();
+            }
+        }
     }
     
     public boolean checkAvailability(int availability){
