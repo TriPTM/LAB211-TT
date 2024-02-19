@@ -1,7 +1,5 @@
 package controller;
 
-import com.sun.xml.internal.ws.util.StringUtils;
-
 public class TextController {
     
     public static String normalizeText(String text){
@@ -15,7 +13,7 @@ public class TextController {
         String temp = "";
         String []str = text.split("\\.");
             for (String string : str) {              
-                temp += StringUtils.capitalize(string) + ".";
+                temp += string.substring(0, 1).toUpperCase() + string.substring(1) + ".";
         } 
         text = temp;
         text = text.replaceAll("[^a-zA-Z0-9]*\\.[^a-zA-Z0-9]*", ". ");
