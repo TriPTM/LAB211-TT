@@ -33,8 +33,8 @@ public class WorkerController {
     public void increaseSalary(String code, double salary) throws Exception{
         for(Worker a:this.listWorker){
             if(a.getId().equals(code)){
-                a.setSalary(a.getSalary()+salary);
-                listSalary.add(new SalaryHistory("Up",a.getId(),a.getName(),a.getWorkLocation(),a.getAge(),a.getSalary()));
+                double amount = checkLastSalaryHistory(code);
+                listSalary.add(new SalaryHistory("Up",a.getId(),a.getName(),a.getWorkLocation(),a.getAge(),amount+salary));
                 System.err.println("Update successful!!!");
                 return;
             }
@@ -47,8 +47,8 @@ public class WorkerController {
             if(a.getId().equals(code)){
                 if(salary>a.getSalary()) throw new Exception("The remaining salary must be greater than 0");
                 else {
-                    a.setSalary(a.getSalary()-salary);
-                    listSalary.add(new SalaryHistory("Down",a.getId(),a.getName(),a.getWorkLocation(),a.getAge(),a.getSalary()));
+                    double amount = checkLastSalaryHistory(code);
+                    listSalary.add(new SalaryHistory("Down",a.getId(),a.getName(),a.getWorkLocation(),a.getAge(),amount-salary));
                     System.err.println("Update successful!!!");
                     return;
                 }
@@ -60,5 +60,20 @@ public class WorkerController {
     public ArrayList<SalaryHistory> show(){
         Collections.sort(listSalary);
         return listSalary;
+    }
+    
+    public double checkLastSalaryHistory(String code){
+        int i = listSalary.size()-1;
+        for(;i>=0;i--){
+            if(listSalary.get(i).getId().equals(code)){
+                return listSalary.get(i).getSalary();
+            }
+        }
+        for(Worker a:this.listWorker){
+            if(a.getId().equals(code)) {
+                return a.getSalary();
+            }
+        }
+        return 0;
     }
 }

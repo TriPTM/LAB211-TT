@@ -3,23 +3,28 @@ package controller;
 
 import java.util.HashMap;
 import model.Dictionary;
-import view.MainMenu;
+import view.DictionaryView;
 
 public class DictionaryController {
     private Dictionary model;
-    private MainMenu view;
+    private DictionaryView view;
     private HashMap<String,String> data;
 
-    public DictionaryController(Dictionary model, MainMenu view) {
+    public DictionaryController(Dictionary model, DictionaryView view) {
         this.model = model;
         this.view = view;
         model.loadData();
         data = model.getDictionary();
+        view.run();
     }
     
     public void addWord(String eng, String vi){
         if(checkWordExist(eng,vi)){
-            
+            String check = view.getInfo("Word has existed since then\nWant to update the mean of word(Yes/No)");
+            if(check.equals("Yes")){
+                String viet = view.getInfo("Enter new meaning Vietnamese");
+//                data.get(eng) = viet;
+            }
         }else{
             data.put(eng, vi);
             model.setDictionary(data);
@@ -31,7 +36,7 @@ public class DictionaryController {
             data.remove(eng);
             model.setDictionary(data);
         }else{
-            
+            view.displayMessage("Don't find " + eng + " in database");
         }
     }
     
