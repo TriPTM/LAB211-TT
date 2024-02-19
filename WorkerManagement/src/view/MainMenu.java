@@ -12,9 +12,9 @@ public class MainMenu extends Menu {
     @Override
     public void execute(int ch) {
         switch(ch){
-            case 1: wView.addWorker();break;
-            case 2: wView.increaseSalary();break;
-            case 3: wView.decreaseSalary();break;
+            case 1: wView.addWorker();System.err.flush();break;
+            case 2: wView.increaseSalary();System.err.flush();break;
+            case 3: wView.decreaseSalary();System.err.flush();break;
             case 4: wView.show();break;
             case 5: System.exit(0);
         }

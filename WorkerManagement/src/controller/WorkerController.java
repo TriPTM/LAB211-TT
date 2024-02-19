@@ -34,20 +34,22 @@ public class WorkerController {
         for(Worker a:this.listWorker){
             if(a.getId().equals(code)){
                 double amount = checkLastSalaryHistory(code);
+                if(amount==0) throw new Exception("Code does not exist!!!");
                 listSalary.add(new SalaryHistory("Up",a.getId(),a.getName(),a.getWorkLocation(),a.getAge(),amount+salary));
                 System.err.println("Update successful!!!");
                 return;
             }
         }
-        throw new Exception("Code does not exist!!!");
+        
     }
     
     public void decreaseSalary(String code, double salary) throws Exception{
         for(Worker a:this.listWorker){
             if(a.getId().equals(code)){
-                if(salary>a.getSalary()) throw new Exception("The remaining salary must be greater than 0");
-                else {
-                    double amount = checkLastSalaryHistory(code);
+                double amount = checkLastSalaryHistory(code);
+                if(amount==0) throw new Exception("Code does not exist!!!");
+                if(salary>amount) throw new Exception("The remaining salary must be greater than 0");
+                else {                   
                     listSalary.add(new SalaryHistory("Down",a.getId(),a.getName(),a.getWorkLocation(),a.getAge(),amount-salary));
                     System.err.println("Update successful!!!");
                     return;

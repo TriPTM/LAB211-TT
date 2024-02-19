@@ -21,13 +21,13 @@ public class DictionaryController {
     public void addWord(String eng, String vi){
         if(checkWordExist(eng,vi)){
             String check = view.getInfo("Word has existed since then\nWant to update the mean of word(Yes/No)");
-            if(check.equals("Yes")){
-                String viet = view.getInfo("Enter new meaning Vietnamese");
-//                data.get(eng) = viet;
+            if(check.equals("No")){
+                view.displayMessage("");
             }
         }else{
             data.put(eng, vi);
             model.setDictionary(data);
+            view.displayMessage("");
         }
     }
     

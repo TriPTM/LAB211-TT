@@ -41,8 +41,6 @@ public class WorkerView {
             System.err.println(ex.getMessage());
             System.err.flush();
         }
-        System.err.flush();
-        
     }
     
     public void increaseSalary(){
@@ -56,7 +54,6 @@ public class WorkerView {
             System.err.println(ex.getMessage());
             System.err.flush();
         }
-        System.err.flush();
     }
     
     public void decreaseSalary(){
@@ -70,7 +67,6 @@ public class WorkerView {
             System.err.println(ex.getMessage());
             System.err.flush();
         }
-        System.err.flush();
     }
     
     public void show(){
