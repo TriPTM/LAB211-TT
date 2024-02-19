@@ -56,11 +56,10 @@ public class Validation {
     }
     
     public int checkInputIntLimit(String td, int min, int max) {
-        Scanner sc=new Scanner(System.in);
         while (true) {
             try {
                 System.out.print(td+": ");
-                int result = Integer.parseInt(sc.nextLine().trim());
+                int result = (int)checkNumber();
                 if (result < min || result > max) {
                     throw new NumberFormatException();
 
@@ -74,14 +73,12 @@ public class Validation {
     }
     
     public double checkPositiveNumber(String td) {
-        Scanner sc=new Scanner(System.in);
         while (true) {
             try {
                 System.out.print(td+": ");
-                double result = Double.parseDouble(sc.nextLine().trim());
+                double result = checkNumber();
                 if (result < 0) {
                     throw new NumberFormatException();
-
                 }
                 return result;
             } catch (NumberFormatException e) {
@@ -89,5 +86,21 @@ public class Validation {
                 System.err.flush();
             }
         }
+    }
+    
+    public double checkNumber(){
+        boolean flag;
+        Scanner sc=new Scanner(System.in);
+        String digit="\\d+";
+        String number;
+        do{
+        number = sc.nextLine().trim();
+        flag = number.matches(digit);
+        if(!flag)  {
+            System.err.println("You must enter a number!");
+            System.err.flush();
+        }
+        }while(!flag);
+        return Double.parseDouble(number);
     }
 }
