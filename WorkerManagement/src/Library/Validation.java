@@ -59,7 +59,7 @@ public class Validation {
         while (true) {
             try {
                 System.out.print(td+": ");
-                int result = (int)checkNumber();
+                int result = checkIntNumber();
                 if (result < min || result > max) {
                     throw new NumberFormatException();
 
@@ -76,7 +76,7 @@ public class Validation {
         while (true) {
             try {
                 System.out.print(td+": ");
-                double result = checkNumber();
+                double result = checkRealNumber();
                 if (result < 0) {
                     throw new NumberFormatException();
                 }
@@ -88,10 +88,26 @@ public class Validation {
         }
     }
     
-    public double checkNumber(){
+    public int checkIntNumber(){
         boolean flag;
         Scanner sc=new Scanner(System.in);
         String digit="\\d+";
+        String number;
+        do{
+        number = sc.nextLine().trim();
+        flag = number.matches(digit);
+        if(!flag)  {
+            System.err.println("You must enter a integer number!");
+            System.err.flush();
+        }
+        }while(!flag);
+        return Integer.parseInt(number);
+    }
+    
+    public double checkRealNumber(){
+        boolean flag;
+        Scanner sc=new Scanner(System.in);
+        String digit="\\d+\\.*\\d+";
         String number;
         do{
         number = sc.nextLine().trim();
