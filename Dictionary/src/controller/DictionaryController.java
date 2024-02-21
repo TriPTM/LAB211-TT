@@ -15,19 +15,25 @@ public class DictionaryController {
         this.view = view;
         model.loadData();
         data = model.getDictionary();
-        view.run();
     }
     
     public void addWord(String eng, String vi){
-        if(checkWordExist(eng,vi)){
-            String check = view.getInfo("Word has existed since then\nWant to update the mean of word(Yes/No)");
-            if(check.equals("No")){
-                view.displayMessage("");
+        if(data.containsKey(eng)){
+            String check = view.getInfo("Word has existed since then\nWant to update the mean of word(Y/N)");
+            if(check.equals("Y")){
+                data.replace(eng, vi);
+                model.setDictionary(data);
+                view.displayRedMessage("Update Successful!!!");
+                System.err.flush();
+            }else{
+                view.displayRedMessage("No change!!!");
+                System.err.flush();
             }
         }else{
             data.put(eng, vi);
             model.setDictionary(data);
-            view.displayMessage("");
+            view.displayRedMessage("Add Successful!!!");
+            System.err.flush();
         }
     }
     
@@ -35,8 +41,11 @@ public class DictionaryController {
         if(data.containsKey(eng)){
             data.remove(eng);
             model.setDictionary(data);
+            view.displayRedMessage("Delete Successful!!!");
+            System.err.flush();
         }else{
-            view.displayMessage("Don't find " + eng + " in database");
+            view.displayRedMessage("Don't find " + eng + " in database!!!");
+            System.err.flush();
         }
     }
     
@@ -44,12 +53,14 @@ public class DictionaryController {
         if(data.containsKey(eng)){
             return data.get(eng);
         }else{
-            return "";
+            return "Not found in database!!!";
         }
     }
     
-    public boolean checkWordExist(String end, String vi){
-        return false;
-    } 
-    
+    public void run(){
+        view.setController(this);
+        view.run();
+        model.updateDatabase();
+        System.exit(0);
+    }
 }

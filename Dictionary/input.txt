@@ -1,0 +1,5 @@
+cat,con meo
+dog,con cho
+eat,an
+like,thich
+go,di

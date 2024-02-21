@@ -30,8 +30,8 @@ public class Dictionary {
                 if(st.length==2){
                     dictionary.put(st[0], st[1]);
                 }
-                sc.close();
             }
+            sc.close();
         } catch (FileNotFoundException ex) {
            System.out.println("File not found: " + ex.getMessage());
         }

@@ -1,0 +1,5 @@
+love,yeu
+like,thich
+go,di
+eat,an
+dog,cho
