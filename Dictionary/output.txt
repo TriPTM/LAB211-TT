@@ -1,5 +1,5 @@
-love,yeu
 like,thich
+cat,meo
 go,di
 eat,an
-dog,cho
+people,nguoi
