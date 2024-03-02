@@ -20,5 +20,6 @@ public class FileView {
         for(String a:folders){
             System.out.print("["+a+"] ");
         }
+        System.out.println("");
     }
 }
