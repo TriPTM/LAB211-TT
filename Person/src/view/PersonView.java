@@ -10,6 +10,10 @@ public class PersonView {
         System.out.println(message);
     }
     
+    public String getWord(String message){
+        return val.getWord(message);
+    }
+    
     public Double getDouble(String message){
         return val.checkPositiveNumber(message);
     }
