@@ -16,7 +16,11 @@ public class FileController {
     public void run(){
         view.displayMessage("===== Analysis Path Program =====");
         String linkFile = view.getString("Please input Path");
-        model.setLinkFile(linkFile);
+        try{
+            model.setLinkFile(linkFile);
+        } catch (Exception ex){
+            view.displayMessage(ex.getMessage());
+        }
         view.displayMessage("----- Result Analysis -----");
         view.displayMessage("Disk: " + model.getDisk());
         view.displayMessage("Extension: " + model.getExtension());

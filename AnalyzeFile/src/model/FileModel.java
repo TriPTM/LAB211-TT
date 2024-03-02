@@ -1,6 +1,8 @@
 
 package model;
 
+import java.io.File;
+
 public class FileModel {
     private String linkFile;
 
@@ -8,6 +10,10 @@ public class FileModel {
     }
 
     public FileModel(String linkFile) {
+        File file = new File(linkFile);
+        if (!file.exists() && !file.isFile()) {
+            throw new RuntimeException("Path isn't file.");
+        }
         this.linkFile = linkFile;
     }
 
@@ -16,6 +22,10 @@ public class FileModel {
     }
 
     public void setLinkFile(String linkFile) {
+        File file = new File(linkFile);
+        if (!file.exists() && !file.isFile()) {
+            throw new RuntimeException("Path isn't file.");
+        }
         this.linkFile = linkFile;
     }
     
