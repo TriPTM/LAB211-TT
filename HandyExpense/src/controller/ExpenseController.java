@@ -29,7 +29,7 @@ public class ExpenseController extends Menu {
     public void addExpense(){
         view.displayMessage("-------- Add an expense--------");
         String date = view.getString("Enter Date");
-        int amount = view.getInt("Enter Amount");
+        String amount = view.getString("Enter Amount");
         String content = view.getString("Enter content");
         String check = model.addExpense(date, amount, content);
         if(check == null){
@@ -44,6 +44,7 @@ public class ExpenseController extends Menu {
     public void displayAllExpenses() {
         view.displayMessage("---------Display all expenses------------");
         view.displayAll(model.getDataExpense());
+        view.printTotal(model.getTotalAmount());
     }
 
     public void deleteExpense() {

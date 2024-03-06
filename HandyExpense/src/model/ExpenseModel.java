@@ -15,7 +15,7 @@ public class ExpenseModel {
         this.model = model;
     }
     
-    public String addExpense(String date, int amount, String content){
+    public String addExpense(String date, String amount, String content){
         try{
             Expense news = new Expense(date,amount,content);
             model.add(news);
@@ -38,5 +38,13 @@ public class ExpenseModel {
     public List<Expense> getDataExpense(){
         return model;
     }
+    
+    public int getTotalAmount(){
+        int total =0;
+        for(Expense a: this.model){
+            total+=a.getAmount();
+        }
+        return total;
+    }   
     
 }

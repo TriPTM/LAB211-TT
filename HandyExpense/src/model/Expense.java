@@ -17,14 +17,19 @@ public class Expense {
     public Expense() {
     }
 
-    public Expense(String date, int amount, String content) {
-         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public Expense(String date, String amount, String content) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         try{
             this.date = LocalDate.parse(date,formatter);
         }catch (DateTimeParseException e) {
             throw new RuntimeException("Date must be in correct format (dd/MM/yyyy)");
         }
-        this.amount = amount;
+        try{
+            int money = Integer.parseInt(amount);
+            this.amount = money;
+        }catch(NumberFormatException e){
+            throw new RuntimeException("Please Enter Number In Amount");
+        }
         this.content = content;
         this.id = ++count;
     }

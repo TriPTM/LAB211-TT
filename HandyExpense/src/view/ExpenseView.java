@@ -37,4 +37,7 @@ public class ExpenseView {
         }
     }
     
+    public void printTotal(int amout){
+        System.out.println("Total: "+amout);
+    }
 }
